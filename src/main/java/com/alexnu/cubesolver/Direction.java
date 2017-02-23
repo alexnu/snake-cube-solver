@@ -1,3 +1,5 @@
+package com.alexnu.cubesolver;
+
 public enum Direction {
 	UP,
 	DOWN,

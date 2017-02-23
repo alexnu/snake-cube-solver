@@ -1,9 +1,11 @@
+package com.alexnu.cubesolver;
+
 public class Step {
 
 	Point point;
 	Direction direction;
 
-	Step(Point point, Direction direction) {
+	public Step(Point point, Direction direction) {
 		this.point = point;
 		this.direction = direction;
 	}
@@ -26,6 +28,6 @@ public class Step {
 
 	@Override
 	public String toString() {
-		return "\nPoint: " + point.toString() + ", Direction: " + direction.toString();
+		return "Point: " + point.toString() + ", Direction: " + direction.toString();
 	}
 }

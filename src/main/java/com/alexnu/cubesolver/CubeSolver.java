@@ -1,3 +1,5 @@
+package com.alexnu.cubesolver;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,36 +9,7 @@ import java.util.stream.Collectors;
 
 public class CubeSolver {
 
-	private static final List<Movement> initialMoves = Arrays.asList(
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.TURN,
-			Movement.STRAIGHT,
-			Movement.STRAIGHT
-	);
-
-	private List<Step> solve(List<Movement> moves, List<Step> steps) {
+	public List<Step> solve(List<Movement> moves, List<Step> steps) {
 
 		if (!steps.isEmpty() && steps.get(steps.size() - 1).isInvalid()) {
 			return new ArrayList<>();
@@ -53,7 +26,7 @@ public class CubeSolver {
 		return nextSteps
 				.stream()
 				.map(nextStep -> solve(remainingMoves, ListHelper.merge(steps, nextStep)))
-				.reduce(new ArrayList<Step>(), ListHelper::merge);
+				.reduce(new ArrayList<Step>(), ListHelper::mergeSolutions);
 	}
 
 	private List<Step> getNextSteps(List<Step> currentSteps, Movement nextMove) {
@@ -139,29 +112,5 @@ public class CubeSolver {
 		}
 
 		return new Point(nextX, nextY, nextZ);
-	}
-
-	public static void main(String[] args) {
-
-		CubeSolver cubeSolver = new CubeSolver();
-
-		for (Integer x = 0; x <= 2; x++) {
-			for (Integer y = 0; y <= 2; y++) {
-				for (Integer z = 0; z <= 2; z++) {
-					for (Direction orientation : Direction.values()) {
-
-						List<Step> initialSteps = Collections.singletonList(new Step(new Point(x, y, z), orientation));
-
-						List<Step> solution = cubeSolver.solve(initialMoves, initialSteps);
-						if (!solution.isEmpty()) {
-							System.out.println("Found a solution:\n" + solution);
-							return;
-						}
-					}
-				}
-			}
-		}
-
-		System.out.println("Could not find solution");
 	}
 }

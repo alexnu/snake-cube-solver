@@ -1,3 +1,5 @@
+package com.alexnu.cubesolver;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +12,11 @@ public class ListHelper {
 		return newList;
 	}
 
-	public static <T> List<T> merge(List<T> listA, List<T> listB) {
-		List<T> newList = new ArrayList<T>(listA);
-		newList.addAll(listB);
-		return newList;
+	public static <T> List<T> mergeSolutions(List<T> listA, List<T> listB) {
+		if (!listA.isEmpty()) {
+			return listA;
+		}
+
+		return listB;
 	}
 }
