@@ -1,5 +1,5 @@
 # snake-cube-solver
-![Snake cube puzzle](https://github.com/alexnu/snake-cube-solver/raw/master/166M.jpg "Snake cube puzzle")
+![Snake cube puzzle](https://github.com/alexnu/snake-cube-solver/raw/master/166Mr.jpg "Snake cube puzzle")
 
 Java solver for the snake cube puzzle
 
