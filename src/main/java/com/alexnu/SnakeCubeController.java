@@ -12,11 +12,45 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/solve")
+@RequestMapping
 public class SnakeCubeController {
 
+	private static final List<Movement> defaultMoves = Arrays.asList(
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.TURN,
+			Movement.STRAIGHT,
+			Movement.STRAIGHT
+	);
+
 	@RequestMapping(method = RequestMethod.GET, produces = "application/json")
-	public String getSolution(@RequestParam String input) {
+	public String defaultExecution() {
+		return solve(defaultMoves);
+	}
+
+	@RequestMapping(value = "/solve", method = RequestMethod.GET, produces = "application/json")
+	public String customExecution(@RequestParam String input) {
 
 		List<Movement> moveList = Arrays.stream(input.split(","))
 				.map(this::parseMove)
@@ -26,6 +60,10 @@ public class SnakeCubeController {
 			return "Input must contain 27 valid moves (S or T).";
 		}
 
+		return solve(moveList);
+	}
+
+	private String solve(List<Movement> moveList) {
 		CubeSolver cubeSolver = new CubeSolver();
 
 		for (Integer x = 0; x <= 2; x++) {
