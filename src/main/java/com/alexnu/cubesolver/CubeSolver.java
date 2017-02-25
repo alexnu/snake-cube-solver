@@ -1,8 +1,6 @@
 package com.alexnu.cubesolver;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,8 +23,8 @@ public class CubeSolver {
 
 		return nextSteps
 				.stream()
-				.map(nextStep -> solve(remainingMoves, ListHelper.merge(steps, nextStep)))
-				.reduce(new ArrayList<Step>(), ListHelper::mergeSolutions);
+				.map(nextStep -> solve(remainingMoves, addToList(steps, nextStep)))
+				.reduce(new ArrayList<>(), this::mergeSolutions);
 	}
 
 	private List<Step> getNextSteps(List<Step> currentSteps, Movement nextMove) {
@@ -112,5 +110,19 @@ public class CubeSolver {
 		}
 
 		return new Point(nextX, nextY, nextZ);
+	}
+
+	private <T> List<T> addToList(List<T> list, T item) {
+		List<T> newList = new ArrayList<>(list);
+		newList.add(item);
+		return newList;
+	}
+
+	private <T> List<T> mergeSolutions(List<T> listA, List<T> listB) {
+		if (!listA.isEmpty()) {
+			return listA;
+		}
+
+		return listB;
 	}
 }
