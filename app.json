@@ -1,0 +1,5 @@
+{
+  "name": "Snake Cube Solver",
+  "description": "A Java recursive solver for the snake cube puzzle.",
+  "image": "heroku/java"
+}
